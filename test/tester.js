@@ -1,6 +1,6 @@
 (function() {
     var events = require(__dirname + "/../events.js");
-    var Promise = require(__dirname + "/../../mini-promise/mini_promise.js").Promise;
+    var Promise = require(__dirname + "/../../mini-promise/mini-promise.js").Promise;
 
     function ThingList() {
         this.things = [];
