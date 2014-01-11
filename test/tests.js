@@ -1,9 +1,11 @@
 ;(function() {
+    "use strict";
 
     describe("Events tests", function() {
         var events = require("../events.js");
 
         function ThingList() {
+            events.EventEmitter.call(this);
             this.things = [];
             this.async = false;
         }
@@ -34,13 +36,14 @@
             var thingList = new ThingList();
 
             var additionListener = function(thingName) {
+                console.log("here with thing: " + thingName);
                 if (thingName === "train") {
                     done();
                 } else {
                     done(new Error("Thing name does not match what is expected. Expecting \"train\", got \""
                                     + thingName + "\""));
                 }
-            }
+            };
 
             thingList.on("addThing", additionListener);
             thingList.add("train");
@@ -59,8 +62,8 @@
                     listenersCalled[name] = 1;
                 }
                 if (Object.keys(listenersCalled).length === 2) {
-                    for (lName in listenersCalled) {
-                        if (listenersCalled[lName] !== expectedCount) {
+                    for (name in listenersCalled) {
+                        if (listenersCalled[name] !== expectedCount) {
                             allCalled = false;
                             break;
                         }
@@ -107,8 +110,8 @@
                     listenersCalled[name] = 1;
                 }
                 if (Object.keys(listenersCalled).length === 2) {
-                    for (lName in listenersCalled) {
-                        if (listenersCalled[lName] !== expectedCount) {
+                    for (name in listenersCalled) {
+                        if (listenersCalled[name] !== expectedCount) {
                             allCalled = false;
                             break;
                         }
@@ -160,8 +163,8 @@
             function listenerCalled(name) {
                 var allCalled = true;
                 listeners[name].count++;
-                for (lName in listeners) {
-                    if (listeners[lName].count !== listeners[lName].expectedCount) {
+                for (name in listeners) {
+                    if (listeners[name].count !== listeners[name].expectedCount) {
                         allCalled = false;
                         break;
                     }
